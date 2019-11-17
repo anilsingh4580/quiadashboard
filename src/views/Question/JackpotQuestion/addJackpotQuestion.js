@@ -55,11 +55,11 @@ const Jackpot = props => {
       if (index === i.toString()) {
         console.log("Matched")
 
-        return { ...item, correctAnswer: 1 }
+        return { ...item, correct: 1 }
       } else {
         console.log("unmatched")
 
-        return { ...item, correctAnswer: 0 }
+        return { ...item, correct: 0 }
       }
     })
     console.log(newA)

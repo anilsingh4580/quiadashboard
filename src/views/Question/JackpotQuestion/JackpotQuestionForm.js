@@ -43,7 +43,7 @@ const JackpotQuestionForm = props => {
                   name="question"
                   value={props.question.question}
                   placeholder="Enter Jackpot Question"
-                  onChange={e => props.formInput({question: e.target.value})}/>
+                  onChange={e => props.formInput({question: e.target.value})} required/>
               </FormGroup>
               <Row>
                 <Col xs="12" sm="12">
@@ -55,7 +55,7 @@ const JackpotQuestionForm = props => {
                       name="option1"
                       // value={props.option1}
                       placeholder="option1"
-                      onChange={e => props.formOption(0,{option: e.target.value,correctAnswer:0})}/>
+                      onChange={e => props.formOption(0,{option: e.target.value,correct:0})} required/>
                   </FormGroup>
                 </Col>
                 
@@ -71,7 +71,7 @@ const JackpotQuestionForm = props => {
                       name="option2"
                       // value={props.option2}
                       placeholder="option2"
-                      onChange={e => props.formOption(1,{option: e.target.value,correctAnswer:0})}/>
+                      onChange={e => props.formOption(1,{option: e.target.value,correct:0})} required/>
                   </FormGroup>
                 </Col>
                 
@@ -87,7 +87,7 @@ const JackpotQuestionForm = props => {
                       name="option3"
                       // value={props.option3}
                       placeholder="option3"
-                      onChange={e => props.formOption(2,{option: e.target.value,correctAnswer:0})}/>
+                      onChange={e => props.formOption(2,{option: e.target.value,correct:0})} required/>
                   </FormGroup>
                 </Col>
                 
@@ -103,7 +103,7 @@ const JackpotQuestionForm = props => {
                       name="option4"
                       // value={props.option4}
                       placeholder="option4"
-                      onChange={e => props.formOption(3,{option: e.target.value,correctAnswer:0})}/>
+                      onChange={e => props.formOption(3,{option: e.target.value,correct:0})} required/>
                   </FormGroup>
                 </Col>
               </Row>
@@ -112,8 +112,9 @@ const JackpotQuestionForm = props => {
                   <Col xs="12">
                     <FormGroup>
                       <Label htmlFor="correct">Correct Answer</Label>
-                      <Input type="select" name="correct" id="correct"  onChange={e => props.correctOption(e.target.value)}>
-                        <option value="0"> Option 1</option>
+                      <Input type="select" name="correct" id="correct"  required onChange={e => props.correctOption(e.target.value)}>
+                        <option  value="">Select</option>                       
+                       <option value="0"> Option 1</option>
                         <option value="1">Option 2</option>
                         <option value="2">Option 3</option>
                         <option value="3">Option 4</option>
