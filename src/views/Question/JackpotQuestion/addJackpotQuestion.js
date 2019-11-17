@@ -44,18 +44,19 @@ const Jackpot = props => {
     })
   }
 
-  const optionHandler = (value = null) => {
-    let x = answer;
-    
-
-    setAnswer([
-      ...answer,
-      ...value
-    ])
-    
+  const optionHandler = (index,value = null) => {
+    let newanswer = [...answer];
+    newanswer[index] = value;
+    setAnswer(newanswer)    
   }
 
+  const correctOption = (index) => {
+    console.log(index);
     
+    answer[index] = { ...answer[index], correctAnswer:1 };
+    setAnswer(answer) 
+
+  }    
   const formSubmit = async (e) => {
     console.log(answer);
     
@@ -69,7 +70,7 @@ const Jackpot = props => {
       <Row>
         <Col xs="12" sm="12">
           <Form className="col-sm-12" onSubmit={formSubmit}>
-            <JackpotQForm formInput={inputHandler} formOption={optionHandler} answer={setAnswer} question={question}/>
+            <JackpotQForm formInput={inputHandler} formOption={optionHandler} answer={setAnswer} question={question} correctOption={correctOption}/>
             <Button
               style={{
               borderRadius: 20

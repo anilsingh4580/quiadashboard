@@ -55,7 +55,7 @@ const JackpotQuestionForm = props => {
                       name="option1"
                       // value={props.option1}
                       placeholder="option1"
-                      onChange={e => props.formOption(index,{option: e.target.value,correctAnswer:0})}/>
+                      onChange={e => props.formOption(0,{option: e.target.value,correctAnswer:0})}/>
                   </FormGroup>
                 </Col>
                 
@@ -71,7 +71,7 @@ const JackpotQuestionForm = props => {
                       name="option2"
                       // value={props.option2}
                       placeholder="option2"
-                      onChange={e => props.formOption({option: e.target.value})}/>
+                      onChange={e => props.formOption(1,{option: e.target.value,correctAnswer:0})}/>
                   </FormGroup>
                 </Col>
                 
@@ -87,7 +87,7 @@ const JackpotQuestionForm = props => {
                       name="option3"
                       // value={props.option3}
                       placeholder="option3"
-                      onChange={e => props.formOption({option: e.target.value})}/>
+                      onChange={e => props.formOption(2,{option: e.target.value,correctAnswer:0})}/>
                   </FormGroup>
                 </Col>
                 
@@ -103,7 +103,7 @@ const JackpotQuestionForm = props => {
                       name="option4"
                       // value={props.option4}
                       placeholder="option4"
-                      onChange={e => props.formOption({option: e.target.value})}/>
+                      onChange={e => props.formOption(3,{option: e.target.value,correctAnswer:0})}/>
                   </FormGroup>
                 </Col>
               </Row>
@@ -112,7 +112,7 @@ const JackpotQuestionForm = props => {
                   <Col xs="12">
                     <FormGroup>
                       <Label htmlFor="correct">Correct Answer</Label>
-                      <Input type="select" name="correct" id="correct"  onChange={e => props.formOption({option: e.target.value})}>
+                      <Input type="select" name="correct" id="correct"  onChange={e => props.correctOption(e.target.value)}>
                         <option value="0"> Option 1</option>
                         <option value="1">Option 2</option>
                         <option value="2">Option 3</option>
