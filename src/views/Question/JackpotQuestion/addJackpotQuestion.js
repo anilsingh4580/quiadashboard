@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import JackpotQForm from './JackpotQuestionForm';
-import {addJackpot } from '../../Service/index';
+import React, { useState } from "react"
+import JackpotQForm from "./JackpotQuestionForm"
+import { withRouter } from "react-router"
+import { addJackpot, addJackpotQn } from "../../Service/index"
 
 import {
   Badge,
@@ -26,17 +27,14 @@ import {
   InputGroupText,
   Label,
   Row
-} from 'reactstrap';
-
+} from "reactstrap"
 
 const Jackpot = props => {
   // Declare a new state variable, which we'll call "question,option"
-  const [question,
-    setQuestion] = useState({ question: '' });
+  const [question, setQuestion] = useState({ question: "" })
 
-    const [answer,
-      setAnswer] = useState([] );
-  
+  const [answer, setAnswer] = useState([])
+
   const inputHandler = (value = null) => {
     setQuestion({
       ...question,
@@ -44,25 +42,40 @@ const Jackpot = props => {
     })
   }
 
-  const optionHandler = (index,value = null) => {
-    let newanswer = [...answer];
-    newanswer[index] = value;
-    setAnswer(newanswer)    
+  const optionHandler = (index, value = null) => {
+    let newanswer = [...answer]
+    newanswer[index] = value
+    setAnswer(newanswer)
   }
 
-  const correctOption = (index) => {
-    console.log(index);
-    
-    answer[index] = { ...answer[index], correctAnswer:1 };
-    setAnswer(answer) 
+  const correctOption = index => {
+    console.log(index)
+    let x = [...answer]
+    let newA = x.map((item, i) => {
+      if (index === i.toString()) {
+        console.log("Matched")
 
-  }    
-  const formSubmit = async (e) => {
-    console.log(answer);
-    
-    e.preventDefault();
-    // const reslt = await addJackpot(state);
-    // console.log(reslt)
+        return { ...item, correctAnswer: 1 }
+      } else {
+        console.log("unmatched")
+
+        return { ...item, correctAnswer: 0 }
+      }
+    })
+    console.log(newA)
+
+    // answer[index] = { ...answer[index], correctAnswer:1 };
+    setAnswer(newA)
+  }
+  const formSubmit = async e => {
+    e.preventDefault()
+    let data = {
+      jackpot: props.location.state.id,
+      question: question.question,
+      options: answer
+    }
+    let res = await addJackpotQn(data)
+    console.log(res)
   }
 
   return (
@@ -70,23 +83,30 @@ const Jackpot = props => {
       <Row>
         <Col xs="12" sm="12">
           <Form className="col-sm-12" onSubmit={formSubmit}>
-            <JackpotQForm formInput={inputHandler} formOption={optionHandler} answer={setAnswer} question={question} correctOption={correctOption}/>
+            <JackpotQForm
+              formInput={inputHandler}
+              formOption={optionHandler}
+              answer={setAnswer}
+              question={question}
+              correctOption={correctOption}
+            />
             <Button
               style={{
-              borderRadius: 20
-            }}
+                borderRadius: 20
+              }}
               type="submit"
               size="md"
               color="primary"
-              className="mr-2">
-              <i className="fa fa-dot-circle-o"/>
+              className="mr-2"
+            >
+              <i className="fa fa-dot-circle-o" />
               Submit
             </Button>
           </Form>
         </Col>
       </Row>
     </div>
-  );
+  )
 }
 
-export default Jackpot;
+export default withRouter(Jackpot)
